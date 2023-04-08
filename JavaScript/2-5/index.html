@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        th, td {
+            padding : 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <select onchange="changeLang()">
+        <option id="select">選択してください</option>
+        <option id="selected_jpn">日本語</option>
+        <option id="selected_en">English</option>
+        <option id="selected_all">全て表示</option>
+    </select>
+    <table>
+        <tr>
+            <th>日本</th>
+            <td>こんにちは</td>
+            <td>ありがとう</td>
+            <td>さようなら</td>
+        </tr>
+        <tr>
+            <th>English</th>
+            <td>Hello</td>
+            <td>Thank you</td>
+            <td>Good Bye</td>
+        </tr>
+    </table>
+
+    <script>
+        //①onchangeで使用されている関数の中身を実装してください。
+        function changeLang() {
+            const select = document.getElementById("select");
+            const selected_jpn = document.getElementById("selected_jpn");
+            const selected_en = document.getElementById("selected_en");
+            const selected_all = document.getElementById("selected_all");
+            const table = document.querySelector("table");
+            // →tableはid属性持っていないから、document.getElementByIdだと取得できない
+            // document.querySelectorでtable要素を取得できた！（CSSセレクタを使用して要素を取得するメゾット）
+
+            // もし日本語が選択されたとき
+            if (selected_jpn.selected) {
+            // table.rows[0]→テーブルの最初の行を表示、displayプロパティ（HTML要素を表示する方法を定義）
+                table.rows[0].style.display = "";
+            // table.rows[1]→テーブルの2番目の行をdisplay = "none";で非表示
+                table.rows[1].style.display = "none";
+            // もし英語が選択されたとき
+            } else if (selected_en.selected) {
+                table.rows[0].style.display = "none";
+                table.rows[1].style.display = "";
+            // もし全てが選択されたとき
+            } else if (selected_all.selected) {
+                table.rows[0].style.display = "";
+                table.rows[1].style.display = "";
+            // 選択されていないときは日本語・英語共にdisplay = "none";で非表示
+            } else {
+                table.rows[0].style.display = "none";
+                table.rows[1].style.display = "none";
+            }
+        }
+
+    </script>
+</body>
+</html>
